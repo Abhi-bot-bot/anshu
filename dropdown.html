@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+var subjectObject = {
+  "B.Tech": {
+    "CSE": ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6", "SEM-7"],
+    "Civil": ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6", "SEM-7"],
+    "Mechanical": ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6", "SEM-7"]    
+  },
+  "M.Tech": {
+    "Aeronautical": ["SEM-1", "SEM-2", "SEM-3", "SEM-4"],
+    "CSE": ["SEM-1", "SEM-2", "SEM-3", "SEM-4"]
+  },
+  "MCA": {
+    "IT": ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"],
+    "AI & ML": ["SEM-1", "SEM-2", "SEM-3", "SEM-4", "SEM-5", "SEM-6"]
+    }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+</script>
+</head>   
+<body style="text-align:center; margin-top: 300px;">
+
+<h1>Time Table</h1>
+
+<form name="form1" id="form1" action="/action_page.php">
+Program: <select name="subject" id="subject">
+    <option value="" selected="selected">Select Program</option>
+  </select>
+  <br><br>
+Branch: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select Program first</option>
+  </select>
+  <br><br>
+Semister: <select name="chapter" id="chapter">
+    <option value="" selected="selected">Please select Branch first</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">  
+</form>
+
+</body>
+</html>
